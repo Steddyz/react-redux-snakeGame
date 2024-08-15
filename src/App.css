@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+  background-color: #161616;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App .start_button {
+  background-color: #161616;
+  color: white;
+  border-color: white;
+  font-size: 22px;
+  padding: 12px 25px;
+  border-radius: 1vh;
+
+  margin-top: 50px;
+}
+
+.Board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.Square button {
+  width: 60px;
+  height: 60px;
+  background-color: #161616;
+  border-color: #727272;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.Square .snake {
+  background-color: green;
+  border-color: green;
+}
+
+.Square .apple {
+  background-color: rgb(182, 0, 0);
+  border-color: rgb(182, 0, 0);
+}
