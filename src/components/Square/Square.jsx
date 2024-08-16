@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function Square({ square }) {
-  const { snake, apple } = useSelector((store) => store.game);
+  const snake = useSelector((store) => store.game.snake);
+  const apple = useSelector((store) => store.game.apple);
 
   let buttonStyle = "";
 

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { moveSnake, switchButton } from "./store/gameSlice";
+import { moveSnake, setDirection, switchButton } from "./store/gameSlice";
 import Board from "./components/Board/Board";
 import { useRef } from "react";
 
 function App() {
-  const { status } = useSelector((store) => store.game);
+  const { status } = useSelector((store) => store.game.status);
   const dispatch = useDispatch();
 
   let timer = useRef(null);
@@ -29,8 +29,12 @@ function App() {
     dispatch(switchButton("Resume"));
   };
 
+  const setDirectionHandler = (event) => {
+    dispatch(setDirection(event.key));
+  };
+
   return (
-    <div className="App">
+    <div className="App" onKeyDownCapture={setDirectionHandler}>
       <Board />
       <button className="start_button" onClick={handleClick}>
         {status}

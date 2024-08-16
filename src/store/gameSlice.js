@@ -14,6 +14,7 @@ const gameSlice = createSlice({
       { x: 1, y: 0 },
     ],
     snakeSize: 2,
+    diretion: "d",
     apple: {
       x: 1,
       y: 1,
@@ -26,14 +27,30 @@ const gameSlice = createSlice({
     moveSnake(state, action) {
       let { x, y } = state.snake.slice(-1)[0];
 
-      x = x >= 9 ? 0 : x + 1;
+      switch (state.diretion) {
+        case "d":
+          x = x >= 9 ? 0 : x + 1;
+          break;
+        case "a":
+          x = x <= 0 ? 9 : x - 1;
+          break;
+        case "w":
+          y = y <= 0 ? 9 : y - 1;
+          break;
+        case "s":
+          y = y >= 9 ? 0 : y + 1;
+          break;
+      }
 
       state.snake.push({ x, y });
       state.snake = state.snake.slice(-state.snakeSize);
     },
+    setDirection(state, action) {
+      state.diretion = action.payload;
+    },
   },
 });
 
-export const { switchButton, moveSnake } = gameSlice.actions;
+export const { switchButton, moveSnake, setDirection } = gameSlice.actions;
 
 export const gameReducer = gameSlice.reducer;
