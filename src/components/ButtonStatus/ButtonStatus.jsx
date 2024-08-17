@@ -32,6 +32,7 @@ export default function ButtonStatus() {
   const handleClick = () => {
     if (status === "Restart") {
       window.location.reload();
+      alert("Better luck next time.");
       return;
     }
 
