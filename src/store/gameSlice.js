@@ -19,6 +19,13 @@ const gameSlice = createSlice({
       x: 1,
       y: 1,
     },
+    stopKey: [
+      ["w", "s"],
+      ["s", "w"],
+      ["a", "d"],
+      ["d", "a"],
+    ],
+    savedKey: "d",
   },
   reducers: {
     switchButton(state) {
@@ -40,17 +47,27 @@ const gameSlice = createSlice({
         case "s":
           y = y >= 9 ? 0 : y + 1;
           break;
+        default:
+          break;
       }
 
       state.snake.push({ x, y });
       state.snake = state.snake.slice(-state.snakeSize);
     },
-    setDirection(state, action) {
-      state.diretion = action.payload;
+    saveKey(state, action) {
+      for (let [a, b] of state.stopKey) {
+        if (a === state.diretion && b === action.payload) return;
+      }
+
+      state.savedKey = action.payload;
+    },
+    setDirection(state) {
+      state.diretion = state.savedKey;
     },
   },
 });
 
-export const { switchButton, moveSnake, setDirection } = gameSlice.actions;
+export const { switchButton, moveSnake, saveKey, setDirection } =
+  gameSlice.actions;
 
 export const gameReducer = gameSlice.reducer;
