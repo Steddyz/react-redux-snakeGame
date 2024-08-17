@@ -2,7 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 
-import { moveSnake, switchButton, setDirection } from "../../store/gameSlice";
+import {
+  moveSnake,
+  switchButton,
+  setDirection,
+  setApple,
+  setGameover,
+} from "../../store/gameSlice";
 
 export default function ButtonStatus() {
   const status = useSelector((store) => store.game.status);
@@ -13,6 +19,8 @@ export default function ButtonStatus() {
   const update = () => {
     dispatch(moveSnake());
     dispatch(setDirection());
+    dispatch(setApple());
+    dispatch(setGameover());
   };
 
   const startTimer = () => {
@@ -22,6 +30,11 @@ export default function ButtonStatus() {
   const stopTimer = () => clearInterval(timer.current);
 
   const handleClick = () => {
+    if (status === "Restart") {
+      window.location.reload();
+      return;
+    }
+
     if (status !== "Pause") {
       startTimer();
     } else {
